@@ -1,0 +1,32 @@
+services:
+  liquidsoap:
+    build:
+      context: ./liquidsoap
+    environment:
+      - CONTROL_PASSWORD=super-secret-password
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - voicevox
+  voicevox:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    expose:
+      - "50021"
+    environment:
+      - VV_CPU_NUM_THREADS=4
+    restart: always
+  # voicevox:
+  #   image: voicevox/voicevox_engine:nvidia-ubuntu20.04-latest
+  #   expose:
+  #     - "50021"
+  #   environment:
+  #     - VV_CPU_NUM_THREADS=4
+  #   restart: always
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
