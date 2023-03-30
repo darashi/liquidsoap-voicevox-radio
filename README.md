@@ -7,7 +7,7 @@
 Start HLS server:
 
 ```
-docker compse up
+docker compose up
 ```
 
 Listen to the stream:
